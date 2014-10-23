@@ -77,22 +77,20 @@
         });
     }
 
-    window.addEventListener('load', function() {
-      var imageRequest = new XMLHttpRequest();
+    var imageRequest = new XMLHttpRequest();
 
-      imageRequest.addEventListener('load', function() {
-        if (imageRequest.status === STATUS_OK) {
-          // pick a random landscape image and use it
-          var photos = JSON.parse(imageRequest.responseText); 
-          var randomIndex = Math.floor(Math.random() * photos.length);
+    imageRequest.addEventListener('load', function() {
+      if (imageRequest.status === STATUS_OK) {
+        // pick a random landscape image and use it
+        var photos = JSON.parse(imageRequest.responseText); 
+        var randomIndex = Math.floor(Math.random() * photos.length);
 
-          setFlickrPhotoSrc(photos[randomIndex]);
-        }
-      });
-
-      // fetch landscape images
-      imageRequest.open('GET', '/search?term=yosemite');
-      imageRequest.send();
+        setFlickrPhotoSrc(photos[randomIndex]);
+      }
     });
+
+    // fetch landscape images
+    imageRequest.open('GET', '/search?term=yosemite');
+    imageRequest.send();
 
 })(this, this.document);
